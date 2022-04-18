@@ -11,6 +11,7 @@ function handleAddTodo() {
         return;
 
     }
+    $("#input").removeClass("Validation")
     
     $("#list").append("<li>" + inputValue + "</li>")
     $("#input").val("");
