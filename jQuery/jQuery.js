@@ -11,6 +11,7 @@ function handleAddTodo() {
         return;
 
     }
+    
     $("#list").append("<li>" + inputValue + "</li>")
     $("#input").val("");
    
