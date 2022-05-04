@@ -3,7 +3,7 @@ $(function(){
 });
 
 function sendAjaxReq(){
-    console.log("bruh")
+    
     $.get("Family MembersList.txt", responseRecevied);
     
 }
