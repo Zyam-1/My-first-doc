@@ -1,6 +1,6 @@
 $(function(){
     sendRequest();
-    $(".div").on( "click", ".btn-danger", handledelete)
+    $("#div").on( "click", ".btn-danger", handledelete)
 
 })
 
