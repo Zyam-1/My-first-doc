@@ -1,16 +1,16 @@
 $(function(){
     sendRequest();
-    $(".div").on( "click", ".btn-danger", handledelete())
+    $(".div").on( "click", ".btn-danger", handledelete)
 
 })
 
 function handledelete() {
     var btn = $(this);
     var parentDiv = btn.closest(".border-div");
-    let id = parentDiv.attr("data-id");
+    var id = parentDiv.attr("data-id");
     console.log(id);
     $.ajax({
-      url: "https://api-emp-by-zt.herokuapp.com/api/employees?fbclid=IwAR0X7q7481JAwoAETGPino5IMwYjEZbKNCTH8ZUXoQtW1XbVppLKoDXitGU/" + id,
+      url: "https://api-emp-by-zt.herokuapp.com/api/employees/" + id,
       method: "DELETE",
       success: function() {
         sendRequest();
@@ -23,7 +23,7 @@ function handledelete() {
 
 function sendRequest() {
     $.ajax({
-        url : "https://api-emp-by-zt.herokuapp.com/api/employees?fbclid=IwAR0X7q7481JAwoAETGPino5IMwYjEZbKNCTH8ZUXoQtW1XbVppLKoDXitGU",
+        url : "https://api-emp-by-zt.herokuapp.com/api/employees",
         method : "GET",
         success : function (response) {
             console.log(response);
