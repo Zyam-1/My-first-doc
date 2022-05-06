@@ -1,6 +1,6 @@
 $(function(){
     sendRequest();
-    $(".border-div").on( "click", ".btn-danger", handledelete())
+    $(".btn-danger").on( "click", handledelete())
 
 })
 
@@ -10,11 +10,11 @@ function handledelete() {
     let id = parentDiv.attr("data-id");
     console.log(id);
     $.ajax({
-      url: "https://fakestoreapi.com/products/" + id,
+      url: "https://api-emp-by-zt.herokuapp.com/api/employees/" + id,
       method: "DELETE",
       success: function() {
         sendRequest();
-      }
+      },
     });
   }
 
@@ -23,7 +23,7 @@ function handledelete() {
 
 function sendRequest() {
     $.ajax({
-        url : "https://fakestoreapi.com/products",
+        url : "https://api-emp-by-zt.herokuapp.com/api/employees",
         method : "GET",
         success : function (response) {
             console.log(response);
@@ -34,7 +34,7 @@ function sendRequest() {
                 var rec = response[i];
                 
                 divRec.append(
-                    ` <div class = "border-div" data-id = "${rec.id}"><h3>${rec.title}</h3><p> ${rec.description} <button type="button" class="btn btn-danger btn-size" style = "float: right">Remove Recipe</button> <button type="button" btn btn-outline-success style = "float: right; border-radius:5px;">Edit</button
+                    ` <div class = "border-div" data-id = "${rec._id}"><h3>${rec.Name}</h3><p> ${rec.Description} <button type="button" class="btn btn-danger btn-size" style = "float: right">Remove Recipe</button> <button type="button" btn btn-outline-success style = "float: right; border-radius:5px;">Edit</button
                     </p></div>`
                   );
             }
