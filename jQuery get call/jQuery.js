@@ -1,6 +1,6 @@
 $(function(){
     sendRequest();
-    $(".btn-danger").on( "click", handledelete())
+    $(".div").on( "click", ".btn-danger", handledelete())
 
 })
 
@@ -10,7 +10,7 @@ function handledelete() {
     let id = parentDiv.attr("data-id");
     console.log(id);
     $.ajax({
-      url: "https://api-emp-by-zt.herokuapp.com/api/employees/" + id,
+      url: "https://api-emp-by-zt.herokuapp.com/api/employees?fbclid=IwAR0X7q7481JAwoAETGPino5IMwYjEZbKNCTH8ZUXoQtW1XbVppLKoDXitGU/" + id,
       method: "DELETE",
       success: function() {
         sendRequest();
@@ -23,7 +23,7 @@ function handledelete() {
 
 function sendRequest() {
     $.ajax({
-        url : "https://api-emp-by-zt.herokuapp.com/api/employees",
+        url : "https://api-emp-by-zt.herokuapp.com/api/employees?fbclid=IwAR0X7q7481JAwoAETGPino5IMwYjEZbKNCTH8ZUXoQtW1XbVppLKoDXitGU",
         method : "GET",
         success : function (response) {
             console.log(response);
