@@ -1,8 +1,27 @@
 $(function(){
     sendRequest();
     $("#div").on( "click", ".btn-danger", handledelete)
+    $(".btn-size") .click(handleAdd)
 
 })
+
+function handleAdd() {
+  var Name = $("#Name").val();
+  var Description = $("#Description").val();
+  
+  $.ajax({
+    url : "https://api-emp-by-zt.herokuapp.com/api/employees",
+    method : "POST",
+    data: {Name, Description},
+    success : function(response) {
+      sendRequest();
+    }
+})
+}
+
+
+
+
 
 function handledelete() {
     var btn = $(this);
@@ -34,7 +53,7 @@ function sendRequest() {
                 var rec = response[i];
                 
                 divRec.append(
-                    ` <div class = "border-div" data-id = "${rec._id}"><h3>${rec.Name}</h3><p> ${rec.Description} <button type="button" class="btn btn-danger btn-size" style = "float: right">Remove Recipe</button> <button type="button" btn btn-outline-success style = "float: right; border-radius:5px;">Edit</button
+                    ` <div class = "border-div" data-id = "${rec._id}"> <button type="button" class="btn btn-danger btn-size" style = "float: right; margin-top:5px;">Remove Recipe</button> <button type="button" btn btn-outline-success style = "float: right; border-radius:5px; margin-top:5px;">Edit</button><h3>${rec.Name}</h3> <p> ${rec.Description} 
                     </p></div>`
                   );
             }
