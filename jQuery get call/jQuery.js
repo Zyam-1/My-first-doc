@@ -6,11 +6,13 @@ $(function(){
       var btn = $(this);
     var parentDiv = btn.closest(".border-div");
     var id = parentDiv.attr("data-id");
-      $.get("https://api-emp-by-zt.herokuapp.com/api/employees/" + id, function(response){
+    console.log(id)
+      $.get("https://usman-recipes.herokuapp.com/api/recipes/" + id, function(response){
+        
         
         $("#updated_id").val(response._id)
-      $("#updated_name").val(response.Name)
-        $("#updated_description").val(response.Description)
+      $("#updated_name").val(response.title)
+        $("#updated_description").val(response.body)
         $("#exampleModal").modal(
           "show")
       });
@@ -19,6 +21,7 @@ $(function(){
     
   
     )
+  
    
 
 
@@ -28,15 +31,15 @@ function handleUpdateBtn () {
   var btn = $(this);
     var parentDiv = btn.closest(".border-div");
     var id = parentDiv.attr("data-id");
-  var Name = $("#updated_name").val
-  var Description = $("#updated_description").val
+  var title = $("#updated_name").val()
+  var body = $("#updated_description").val()
   console.log ( "Bruh")
   $.ajax ({
-    url : "https://api-emp-by-zt.herokuapp.com/api/employees/" + id,
-    data: { Name, Description },
+    url : "https://usman-recipes.herokuapp.com/api/recipes/" + id,
+    data: { title, body },
     method: "PUT",
     
-    success : function(response) {
+    success : function() {
       sendRequest();
       $("#exampleModal").modal(
         "hide")
@@ -46,13 +49,13 @@ function handleUpdateBtn () {
 }
 
 function handleAdd() {
-  var Name = $("#Name").val();
-  var Description = $("#Description").val();
+  var title = $("#Name").val();
+  var body = $("#Description").val();
   
   $.ajax({
-    url : "https://api-emp-by-zt.herokuapp.com/api/employees",
+    url : "https://usman-recipes.herokuapp.com/api/recipes",
     method : "POST",
-    data: {Name, Description},
+    data: {title, body},
     success : function(response) {
       sendRequest();
     }
@@ -69,7 +72,7 @@ function handledelete() {
     var id = parentDiv.attr("data-id");
     console.log(id);
     $.ajax({
-      url: "https://api-emp-by-zt.herokuapp.com/api/employees/" + id,
+      url: "https://usman-recipes.herokuapp.com/api/recipes/" + id,
       method: "DELETE",
       success: function() {
         sendRequest();
@@ -82,7 +85,7 @@ function handledelete() {
 
 function sendRequest() {
     $.ajax({
-        url : "https://api-emp-by-zt.herokuapp.com/api/employees",
+        url : "https://usman-recipes.herokuapp.com/api/recipes",
         method : "GET",
         success : function (response) {
             console.log(response);
@@ -93,7 +96,7 @@ function sendRequest() {
                 var rec = response[i];
                 
                 divRec.append(
-                    ` <div class = "border-div" data-id = "${rec._id}"> <button type="button" class="btn btn-danger btn-size" style = "float: right; margin-top:5px;">Remove Recipe</button> <button type="button" class =" btn btn-outline-success" style = "float: right; border-radius:5px; margin-top:5px;">Edit</button><h3>${rec.Name}</h3> <p> ${rec.Description} 
+                    ` <div class = "border-div" data-id = "${rec._id}"> <button type="button" class="btn btn-danger btn-size" style = "float: right; margin-top:5px;">Remove Recipe</button> <button type="button" class =" btn btn-outline-success" style = "float: right; border-radius:5px; margin-top:5px;">Edit</button><h3>${rec.title}</h3> <p> ${rec.body} 
                     </p></div>`
                   );
             }
