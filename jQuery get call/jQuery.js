@@ -2,8 +2,48 @@ $(function(){
     sendRequest();
     $("#div").on( "click", ".btn-danger", handledelete)
     $(".btn-size") .click(handleAdd)
+    $("#div").on("click", ".btn-outline-success", function() {
+      var btn = $(this);
+    var parentDiv = btn.closest(".border-div");
+    var id = parentDiv.attr("data-id");
+      $.get("https://api-emp-by-zt.herokuapp.com/api/employees/" + id, function(response){
+        
+        $("#updated_id").val(response._id)
+      $("#updated_name").val(response.Name)
+        $("#updated_description").val(response.Description)
+        $("#exampleModal").modal(
+          "show")
+      });
+
+    }
+    
+  
+    )
+   
+
 
 })
+
+function handleUpdateBtn () {
+  var btn = $(this);
+    var parentDiv = btn.closest(".border-div");
+    var id = parentDiv.attr("data-id");
+  var Name = $("#updated_name").val
+  var Description = $("#updated_description").val
+  console.log ( "Bruh")
+  $.ajax ({
+    url : "https://api-emp-by-zt.herokuapp.com/api/employees/" + id,
+    data: { Name, Description },
+    method: "PUT",
+    
+    success : function(response) {
+      sendRequest();
+      $("#exampleModal").modal(
+        "hide")
+    }
+
+  })
+}
 
 function handleAdd() {
   var Name = $("#Name").val();
@@ -53,7 +93,7 @@ function sendRequest() {
                 var rec = response[i];
                 
                 divRec.append(
-                    ` <div class = "border-div" data-id = "${rec._id}"> <button type="button" class="btn btn-danger btn-size" style = "float: right; margin-top:5px;">Remove Recipe</button> <button type="button" btn btn-outline-success style = "float: right; border-radius:5px; margin-top:5px;">Edit</button><h3>${rec.Name}</h3> <p> ${rec.Description} 
+                    ` <div class = "border-div" data-id = "${rec._id}"> <button type="button" class="btn btn-danger btn-size" style = "float: right; margin-top:5px;">Remove Recipe</button> <button type="button" class =" btn btn-outline-success" style = "float: right; border-radius:5px; margin-top:5px;">Edit</button><h3>${rec.Name}</h3> <p> ${rec.Description} 
                     </p></div>`
                   );
             }
@@ -62,5 +102,4 @@ function sendRequest() {
     })
 
 }
-
 
